@@ -8,8 +8,8 @@ import "."
 
 Panel {
   id: root
-  moduleName: "josip.font-rendering"
-  ipcTarget: "josip.font-rendering"
+  moduleName: "kontekst.font-rendering"
+  ipcTarget: "kontekst.font-rendering"
   manageIpc: false
 
   implicitWidth: button.implicitWidth

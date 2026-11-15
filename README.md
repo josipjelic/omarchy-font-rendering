@@ -22,7 +22,7 @@ omarchy plugin add https://github.com/josipjelic/omarchy-font-rendering --enable
 ## Remove
 
 ```bash
-omarchy plugin remove josip.font-rendering
+omarchy plugin remove kontekst.font-rendering
 ```
 
 ## License
