@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "josip.font-rendering",
+  "name": "Font Rendering",
+  "version": "1.0.0",
+  "author": "jjelic",
+  "license": "MIT",
+  "description": "Control font antialiasing, hinting, subpixel order and LCD filter through fontconfig.",
+  "kinds": ["bar-widget"],
+  "entryPoints": { "barWidget": "Panel.qml" },
+  "barWidget": {
+    "displayName": "Font Rendering",
+    "description": "Antialiasing, hinting and subpixel settings.",
+    "category": "Appearance",
+    "allowMultiple": false,
+    "defaults": {}
+  }
+}
