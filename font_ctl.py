@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Read/write ~/.config/fontconfig/fonts.conf rendering settings."""
-import json, os, re, subprocess, sys
+import json, os, re, shutil, subprocess, sys
 
 CONF = os.path.expanduser("~/.config/fontconfig/fonts.conf")
 DEFAULTS = {"antialias": True, "hinting": True, "hintstyle": "hintslight",
@@ -23,13 +23,23 @@ def read():
         if m: s[k] = m.group(1)
     return s
 
+MARKER = "Managed by the kontekst.font-rendering Omarchy plugin"
+BACKUP = CONF + ".bak-font-rendering"
+
 def write(s):
     os.makedirs(os.path.dirname(CONF), exist_ok=True)
+    # Never destroy a hand-written config: back it up once before taking over.
+    if os.path.exists(CONF) and not os.path.exists(BACKUP):
+        try:
+            if "font-rendering Omarchy plugin" not in open(CONF).read():
+                shutil.copy2(CONF, BACKUP)
+        except OSError:
+            pass
     b = lambda v: "true" if v else "false"
     xml = f'''<?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
 <fontconfig>
-  <!-- Managed by the font-rendering Omarchy plugin -->
+  <!-- {MARKER} -->
   <match target="font">
     <edit name="antialias" mode="assign"><bool>{b(s["antialias"])}</bool></edit>
     <edit name="hinting"   mode="assign"><bool>{b(s["hinting"])}</bool></edit>
